@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.algaworks.algafood.domain.model.Kitchen;
 import com.algaworks.algafood.domain.repository.KitchenRepository;
+import com.algaworks.algafood.model.KitchenXmlWrapper;
 
 @RestController
 @RequestMapping("/kitchens")
@@ -20,9 +21,9 @@ public class KitchenController {
 	private KitchenRepository kitchenRepository;
 	
 	@GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
-	public List<Kitchen> listXml() {
+	public KitchenXmlWrapper listXml() {
 		
-		return kitchenRepository.list();
+		return new KitchenXmlWrapper(kitchenRepository.list());
 	}
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
