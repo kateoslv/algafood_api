@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,8 +34,14 @@ public class KitchenController {
 	}
 	
 	@GetMapping("/{id}")
-	public Kitchen findById(@PathVariable("id") Long id) {
+	public ResponseEntity<Kitchen> findById(@PathVariable("id") Long id) {
 		
-		return kitchenRepository.findById(id);
+		Kitchen kitchen = kitchenRepository.findById(id);
+		
+		if (kitchen != null) {
+			return ResponseEntity.ok(kitchen);
+		}
+		
+		return ResponseEntity.notFound().build();
 	}
 }
