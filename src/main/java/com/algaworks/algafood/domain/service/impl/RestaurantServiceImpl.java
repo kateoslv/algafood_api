@@ -39,7 +39,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 	@Override
 	public void remove(Long id) {
 		try {
-			restaurantRepository.remove(id);
+			restaurantRepository.deleteById(id);
 			
 		} catch (EmptyResultDataAccessException e) {
 			throw new EntityNotFoundException(
