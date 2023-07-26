@@ -49,6 +49,13 @@ public class TestController {
 		return restaurantRepository.findByDeliveryFeeBetween(initialDeliveryFee, finalDeliveryFee);
 	}
 	
+	@GetMapping("/search_name_and_delivery_fee")
+	public List<Restaurant> findByNameAndDeliveryFee(String name,
+			BigDecimal initialDeliveryFee, BigDecimal finalDeliveryFee) {
+		
+		return restaurantRepository.find(name, initialDeliveryFee, finalDeliveryFee);
+	}
+	
 	@GetMapping("/exists_by_name")
 	public boolean findByExistentName(String name) {
 		
