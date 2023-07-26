@@ -26,7 +26,7 @@ public class KitchenServiceImpl implements KitchenService {
 	@Override
 	public void remove(Long id) {
 		try {
-			kitchenRepository.remove(id);
+			kitchenRepository.deleteById(id);
 			
 		} catch (EmptyResultDataAccessException e) {
 			throw new EntityNotFoundException(

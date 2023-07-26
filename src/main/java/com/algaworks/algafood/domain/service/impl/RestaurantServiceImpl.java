@@ -26,12 +26,11 @@ public class RestaurantServiceImpl implements RestaurantService {
 	public Restaurant save(Restaurant restaurant) {
 		
 		Long kitchenId = restaurant.getKitchen().getId();
-		Kitchen kitchen = kitchenRepository.findById(kitchenId);
 		
-		if (kitchen == null) {
-			throw new EntityNotFoundException(
-					String.format("Doesn't exist a kitchen with id %d", kitchenId));
-		}
+		Kitchen kitchen = kitchenRepository.findById(kitchenId)
+				.orElseThrow(() -> new EntityNotFoundException(
+						String.format("Doesn't exist a kitchen with id %d", kitchenId)));
+		
 		restaurant.setKitchen(kitchen);
 		
 		return restaurantRepository.save(restaurant);
