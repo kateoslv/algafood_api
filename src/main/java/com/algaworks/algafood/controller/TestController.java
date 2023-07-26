@@ -37,6 +37,12 @@ public class TestController {
 		return restaurantRepository.findTop2ByNameContaining(name);
 	}
 	
+	@GetMapping("/search_name_and_kitchen_id")
+	public Optional<Restaurant> findByNameAndKitchenId2(String name, Long kitchenId) {
+		
+		return restaurantRepository.consultByName(name, kitchenId);
+	}
+	
 	@GetMapping("/search_delivery_fee")
 	public List<Restaurant> findByDeliveryFee(BigDecimal initialDeliveryFee, BigDecimal finalDeliveryFee) {
 		
