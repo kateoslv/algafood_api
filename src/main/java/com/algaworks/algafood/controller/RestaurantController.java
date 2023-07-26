@@ -44,7 +44,7 @@ public class RestaurantController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Restaurant> findById(@PathVariable("id") Long id) {
+	public ResponseEntity<Restaurant> findById(@PathVariable Long id) {
 		
 		Optional<Restaurant> restaurant = restaurantRepository.findById(id);
 		
@@ -68,7 +68,7 @@ public class RestaurantController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@PathVariable("id") Long id,
+	public ResponseEntity<?> update(@PathVariable Long id,
 			@RequestBody Restaurant restaurant) {
 		try {
 			Optional<Restaurant> restaurantFound = restaurantRepository.findById(id);
@@ -89,7 +89,7 @@ public class RestaurantController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> remove(@PathVariable("id") Long id) {
+	public ResponseEntity<?> remove(@PathVariable Long id) {
 		try {
 			restaurantService.remove(id);
 			
@@ -105,7 +105,7 @@ public class RestaurantController {
 	}
 	
 	@PatchMapping("/{id}")
-	public ResponseEntity<?> partialUpdate(@PathVariable("id") Long id,
+	public ResponseEntity<?> partialUpdate(@PathVariable Long id,
 			@RequestBody Map<String, Object> fields) {
 		
 		Optional<Restaurant> restaurantFound = restaurantRepository.findById(id);

@@ -39,7 +39,7 @@ public class KitchenController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Kitchen> findById(@PathVariable("id") Long id) {
+	public ResponseEntity<Kitchen> findById(@PathVariable Long id) {
 		
 		Optional<Kitchen> kitchen = kitchenRepository.findById(id);
 		
@@ -63,7 +63,7 @@ public class KitchenController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Kitchen> update(@PathVariable("id") Long id,
+	public ResponseEntity<Kitchen> update(@PathVariable Long id,
 			@RequestBody Kitchen kitchen) {
 
 		Optional<Kitchen> kitchenFound = kitchenRepository.findById(id);
