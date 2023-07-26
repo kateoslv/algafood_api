@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.algaworks.algafood.domain.exception.EntityBeingUsedException;
@@ -51,10 +50,16 @@ public class KitchenController {
 	}
 	
 	@PostMapping
-	@ResponseStatus(HttpStatus.CREATED)
-	public Kitchen save(@RequestBody Kitchen kitchen) {
-		
-		return kitchenService.save(kitchen);
+	public ResponseEntity<?> create(@RequestBody Kitchen kitchen) {
+		try {
+			kitchen = kitchenService.save(kitchen);
+			
+			return ResponseEntity.status(HttpStatus.CREATED)
+					.body(kitchen);
+		} catch (EntityNotFoundException e) {
+			return ResponseEntity.badRequest()
+					.body(e.getMessage());
+		}
 	}
 	
 	@PutMapping("/{id}")
@@ -75,7 +80,7 @@ public class KitchenController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Kitchen> remove(@PathVariable("id") Long id) {
+	public ResponseEntity<?> remove(@PathVariable Long id) {
 		try {
 			kitchenService.remove(id);
 			
@@ -85,7 +90,8 @@ public class KitchenController {
 			return ResponseEntity.notFound().build();
 			
 		} catch (EntityBeingUsedException e) {
-			return ResponseEntity.status(HttpStatus.CONFLICT).build();
+			return ResponseEntity.status(HttpStatus.CONFLICT)
+					.body(e.getMessage());
 		}
 	}
 	

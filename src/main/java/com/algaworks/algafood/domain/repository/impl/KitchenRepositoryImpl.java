@@ -43,7 +43,6 @@ public class KitchenRepositoryImpl implements KitchenRepository {
 		if (kitchen == null) {
 			throw new EmptyResultDataAccessException(1);
 		}
-		
 		manager.remove(kitchen);
 	}
 
