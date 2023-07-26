@@ -26,7 +26,7 @@ public class CityServiceImpl implements CityService {
 	@Override
 	public void remove(Long id) {
 		try {
-			cityRepository.remove(id);
+			cityRepository.deleteById(id);
 			
 		} catch (EmptyResultDataAccessException e) {
 			throw new EntityNotFoundException(
