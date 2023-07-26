@@ -26,7 +26,7 @@ public class StateServiceImpl implements StateService {
 	@Override
 	public void remove(Long id) {
 		try {
-			stateRepository.remove(id);
+			stateRepository.deleteById(id);
 			
 		} catch (EmptyResultDataAccessException e) {
 			throw new EntityNotFoundException(
